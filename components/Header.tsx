@@ -57,7 +57,7 @@ const Header = () => {
                   endContent={<IoIosArrowDown />}
                   variant="light"
                 >
-                  EQUIPA
+                  Equipas
                 </Button>
               </DropdownTrigger>
             </NavbarItem>
@@ -171,11 +171,98 @@ const Header = () => {
             className="lg:hidden text-white"
           />
         </NavbarContent>
-        <NavbarMenu className="mt-8">
+        <NavbarMenu className="mt-8 bg-content3 pt-12 px-12">
           <NavbarMenuItem className="z-50">
-            <Link color="primary" className="w-full" href="#" size="lg">
-              TEST
-            </Link>
+            <div className="w-full flex flex-col gap-8 items-start">
+              <div className="w-max flex flex-col gap-8 items-start">
+                <h1 id="h-txt" className="text-2xl w-max">
+                  Mutts - Tackle
+                </h1>
+                <div className="grid sm:grid-cols-2 w-full items-center justify-center gap-6 sm:gap-x-24">
+                  <Link
+                    id="nav-link"
+                    className="text-black hover:text-primary"
+                    href="/news"
+                  >
+                    Roster
+                  </Link>
+                  <Link
+                    id="nav-link"
+                    className="text-black hover:text-primary"
+                    href="/news"
+                  >
+                    Calendário
+                  </Link>
+                  <Link
+                    id="nav-link"
+                    className="text-black hover:text-primary"
+                    href="/news"
+                  >
+                    Resultados
+                  </Link>
+                  <Link
+                    id="nav-link"
+                    className="text-black hover:text-primary"
+                    href="/news"
+                  >
+                    Classificação
+                  </Link>
+                </div>
+              </div>
+              <Divider
+                className="w-full self-start h-[1px]"
+                orientation="horizontal"
+              />
+              <div className="w-max flex flex-col gap-8 items-start">
+                <h1 id="h-txt" className="text-2xl w-max">
+                  Mutts - Flag
+                </h1>
+                <div className="grid sm:grid-cols-2 w-full items-center justify-center gap-6 sm:gap-x-24">
+                  <Link
+                    id="nav-link"
+                    className="text-black hover:text-primary"
+                    href="/news"
+                  >
+                    Roster
+                  </Link>
+                  <Link
+                    id="nav-link"
+                    className="text-black hover:text-primary"
+                    href="/news"
+                  >
+                    Calendário
+                  </Link>
+                  <Link
+                    id="nav-link"
+                    className="text-black hover:text-primary"
+                    href="/news"
+                  >
+                    Resultados
+                  </Link>
+                  <Link
+                    id="nav-link"
+                    className="text-black hover:text-primary"
+                    href="/news"
+                  >
+                    Classificação
+                  </Link>
+                </div>
+              </div>
+              <Divider
+                className="w-full self-start h-[1px]"
+                orientation="horizontal"
+              />
+              <Link id="nav-link" className="text-black" href="/news">
+                Notícias
+              </Link>
+              <Divider
+                className="w-full self-start h-[1px]"
+                orientation="horizontal"
+              />
+              <Link id="nav-link" className="text-black" href="/about">
+                Sobre Nós
+              </Link>
+            </div>
           </NavbarMenuItem>
         </NavbarMenu>
       </Navbar>
