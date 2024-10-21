@@ -6,8 +6,8 @@ export const metadata: Metadata = {
 };
 const NotFoundPage = () => {
   return (
-    <main className="px-4 bg-neutral-200">
-      <div className="flex flex-col w-full items-center justify-center min-h-screen">
+    <main className="px-4 ">
+      <div className="flex flex-col w-full items-center justify-center pt-36">
         <div className="flex flex-col gap-4 items-center text-center">
           <h1 id="h-txt" className="text-8xl mb-2">
             404
