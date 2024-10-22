@@ -1,3 +1,5 @@
+"use client";
+import { motion } from "framer-motion";
 import { Suspense } from "react";
 
 export default function Home() {
@@ -20,9 +22,14 @@ export default function Home() {
           >
             Not Supported
           </video>
-          <div className="flex items-center justify-center p-4 rounded-lg bg-primary lg:text-8xl sm:text-7xl xs:text-5xl text-3xl shadow-lg bottom-0 translate-y-1/2 text-white text-center absolute">
+          <motion.div
+            initial={{ opacity: 0 }}
+            transition={{ duration: 300, delay: 300 }}
+            animate={{ opacity: 1 }}
+            className="flex items-center justify-center p-4 rounded-lg bg-primary lg:text-8xl sm:text-7xl xs:text-5xl text-3xl shadow-lg bottom-0 translate-y-1/2 text-white text-center absolute"
+          >
             <h1 id="h-txt">Home of the Maia Mutts</h1>
-          </div>
+          </motion.div>
         </Suspense>
       </div>
       <div className="w-full h-96"></div>
