@@ -24,7 +24,7 @@ const Header = () => {
   return (
     <Navbar
       isBordered
-      maxWidth="2xl"
+      maxWidth="xl"
       onMenuOpenChange={setIsMenuOpen}
       className="py-4 w-full !bg-background"
     >
