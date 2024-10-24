@@ -1,10 +1,44 @@
 "use client";
 import Delayed from "@/components/Delayed";
-import { Image } from "@nextui-org/react";
+import {
+  Card,
+  CardBody,
+  CardFooter,
+  CardHeader,
+  Divider,
+  Image,
+  Link,
+} from "@nextui-org/react";
 import NextImage from "next/image";
-import { Suspense } from "react";
+import { Suspense, useEffect, useState } from "react";
 
 export default function Home() {
+  const [practices, updatePractices] = useState<Date[]>([]);
+  const getNextWeekdayDates = (
+    hours: number,
+    minutes: number,
+    days: number[]
+  ): Date[] => {
+    const now = new Date();
+    const dates: Date[] = [];
+
+    days.forEach((day) => {
+      const date = new Date();
+      const currentDay = now.getDay();
+      const dayOffset = (day + 7 - currentDay) % 7;
+      date.setDate(now.getDate() + dayOffset);
+      date.setHours(hours, minutes, 0, 0);
+      dates.push(date);
+    });
+    dates.sort((a, b) => a.getTime() - b.getTime());
+    return dates;
+  };
+  useEffect(() => {
+    const days = [1, 3, 5];
+    const startTime = 21;
+    const startDates = getNextWeekdayDates(startTime, 0, days);
+    updatePractices(startDates);
+  }, []);
   return (
     <div className="flex flex-col relative w-full items-center">
       <div className="w-full h-full relative flex flex-col items-center justify-center">
@@ -60,9 +94,87 @@ export default function Home() {
           </div>
         </Suspense>
       </div>
-      <div className="pt-32 w-full px-4 flex flex-row justify-between max-w-screen-xl">
-        <div className="flex flex-col gap-2 items-center">
-          <h1 id="h-txt" className="text-4xl mb-2">
+      <div className="pt-32 w-full px-6 flex lg:flex-row flex-col kg:justify-between justify-start  max-w-screen-xl gap-4">
+        <Card className="w-full bg-background border border-neutral-800">
+          <CardHeader className="flex flex-col items-center justify-center bg-primary p-3 pb-2">
+            <h1 id="h-txt" className="text-4xl">
+              Próximos Treinos
+            </h1>
+          </CardHeader>
+          <CardBody className="pb-0">
+            {practices.map((practice, i) => {
+              const endPractice = new Date(practice);
+              endPractice.setHours(practice.getHours() + 2);
+              return (
+                <div
+                  key={practice.toISOString()}
+                  className="flex flex-col items-center w-full"
+                >
+                  <div className="w-full p-4 px-0 flex flex-row items-center justify-between">
+                    <div className="aspect-square h-full w-auto p-4">
+                      <h1
+                        id="h-txt"
+                        className="sm:text-5xl text-3xl text-green-700"
+                      >
+                        {practice.getDate()}
+                      </h1>
+                    </div>
+                    <div className="flex flex-col items-center w-full">
+                      <div className="w-full p-4 flex flex-row items-center justify-between gap-4">
+                        <div className="w-full flex flex-col items-center">
+                          <p
+                            id="s-txt"
+                            className="sm:text-xl text-sm text-white"
+                          >
+                            {practice
+                              .toLocaleDateString("pt-PT", {
+                                weekday: "long",
+                              })
+                              .toLocaleUpperCase("pt-PT")}
+                          </p>
+                        </div>
+                        <div className="h-full w-auto p-2 text-right">
+                          <h1
+                            id="h-txt"
+                            className="sm:text-3xl text-lg text-white w-max"
+                          >
+                            {practice.toLocaleTimeString([], {
+                              hour: "2-digit",
+                              minute: "2-digit",
+                              hour12: false,
+                            })}{" "}
+                            -{" "}
+                            {endPractice.toLocaleTimeString([], {
+                              hour: "2-digit",
+                              minute: "2-digit",
+                              hour12: false,
+                            })}
+                          </h1>
+                        </div>
+                      </div>
+                      {i < practices.length - 1 && (
+                        <Divider className="w-full h-[1px] bg-white opacity-30 justify-end" />
+                      )}
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </CardBody>
+          <Divider className="w-full h-[1px] bg-white opacity-35" />
+          <CardFooter className="flex flex-col items-center justify-center pb-2">
+            <Link
+              isExternal
+              showAnchorIcon
+              href="https://instagram.com/muttscfa"
+              id="nav-link"
+            >
+              Mais informações.
+            </Link>
+          </CardFooter>
+        </Card>
+        <div className="flex flex-col gap-2 items-center w-full sm:min-w-xs">
+          <h1 id="h-txt" className="text-4xl mb-2 mt-3">
             Onde Treinamos?
           </h1>
           <a
@@ -93,7 +205,6 @@ export default function Home() {
             </h3>
           </div>
         </div>
-        <div className=""></div>
       </div>
       <div className="w-full h-96"></div>
       <div className="w-full h-96"></div>
